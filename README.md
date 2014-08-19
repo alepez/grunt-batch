@@ -64,7 +64,28 @@ Default value:  `function (callback) { callback(); }`
 A function that will be executed once at the startup.
 
 ### Usage Examples
-_(Nothing yet)_
+
+This example uses `convert` (ImageMagick) to resize each png image to a preview jpg,
+replacing transparencies with white background.
+
+    grunt.initConfig({
+      batch: {
+        person_preview: {
+          options: {
+            cmd: function (f) {
+              return 'convert ' + f.src[0] + ' -background "#ffffff" -flatten -resize 200x ' + f.dest;
+            },
+          },
+          files: [{
+            expand: true,
+            cwd: 'src/assets/images',
+            dest: 'dest/assets/images',
+            src: ['*.png'],
+            ext: '.preview.jpg',
+          }],
+        },
+      },
+    });
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
