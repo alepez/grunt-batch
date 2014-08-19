@@ -8,7 +8,7 @@
 
 'use strict';
 
-module.exports = function(grunt) {
+module.exports = function (grunt) {
 
   // Project configuration.
   grunt.initConfig({
@@ -30,20 +30,20 @@ module.exports = function(grunt) {
 
     // Configuration to be run (and then tested).
     batch: {
-      default_options: {
+      cat: {
         options: {
+          cmd: function (f) {
+            var cmd = 'cat ' + f.src.join(' ') + ' > ' + f.dest;
+            grunt.log.writeln(cmd);
+            return cmd;
+          },
+          setup: function (done) {
+            grunt.file.mkdir('tmp');
+            done();
+          }
         },
         files: {
-          'tmp/default_options': ['test/fixtures/testing', 'test/fixtures/123']
-        }
-      },
-      custom_options: {
-        options: {
-          separator: ': ',
-          punctuation: ' !!!'
-        },
-        files: {
-          'tmp/custom_options': ['test/fixtures/testing', 'test/fixtures/123']
+          'tmp/cat': ['test/fixtures/testing', 'test/fixtures/123']
         }
       }
     },

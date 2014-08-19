@@ -13,18 +13,28 @@ var async = require('async');
 
 module.exports = function (grunt) {
   grunt.registerMultiTask('batch', 'Easy way to run a shell command for each file.', function () {
-    var options = this.options({});
-    var series = [];
-    this.files.forEach(function (f) {
-      var cmd = options.cmd(f);
-      series.push(function (callback) {
-        exec(cmd, function () {
-          grunt.log.ok(f.src, ' => ', f.dest);
-          callback();
+    var options = this.options({
+      setup: function (callback) {
+        grunt.log.ok('setup...');
+        callback();
+      }
+    });
+    var setup = options.setup;
+    var files = this.files;
+    var done = this.async();
+    setup(function () {
+      grunt.log.ok('setup ok');
+      var series = [];
+      files.forEach(function (f) {
+        var cmd = options.cmd(f);
+        series.push(function (callback) {
+          exec(cmd, function () {
+            grunt.log.ok(f.src, ' => ', f.dest);
+            callback();
+          });
         });
       });
+      async.series(series, done);
     });
-    var done = this.async();
-    async.series(series, done);
   });
 };
