@@ -26,7 +26,13 @@ In your project's Gruntfile, add a section named `batch` to the data object pass
 grunt.initConfig({
   batch: {
     options: {
-      // Task-specific options go here.
+      cmd: function (f) {
+        return 'cat ' + f.src.join(' ') + ' > ' + f.dest;
+      },
+      setup: function (done) {
+        grunt.file.mkdir('tmp');
+        done();
+      }
     },
     your_target: {
       // Target-specific file lists and/or options go here.
@@ -37,50 +43,28 @@ grunt.initConfig({
 
 ### Options
 
-#### options.separator
-Type: `String`
-Default value: `',  '`
+#### options.cmd
+Type: `function`
+Default value: `undefined`
 
-A string value that is used to do something with whatever.
+A function returning the command string to execute. It's executed for each file.
 
-#### options.punctuation
-Type: `String`
-Default value: `'.'`
+##### Example:
 
-A string value that is used to do something else with whatever else.
+    cmd: function (f) {
+      return 'cat ' + f.src.join(' ') + ' > ' + f.dest;
+    },
+
+Will join all files in `src` to `dest`, using the system command `cat`.
+
+#### options.setup
+Type: `function`
+Default value:  `function (callback) { callback(); }`
+
+A function that will be executed once at the startup.
 
 ### Usage Examples
-
-#### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
-
-```js
-grunt.initConfig({
-  batch: {
-    options: {},
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
-});
-```
-
-#### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
-
-```js
-grunt.initConfig({
-  batch: {
-    options: {
-      separator: ': ',
-      punctuation: ' !!!',
-    },
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
-});
-```
+_(Nothing yet)_
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).

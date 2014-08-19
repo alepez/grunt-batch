@@ -17,6 +17,9 @@ module.exports = function (grunt) {
       setup: function (callback) {
         grunt.log.ok('setup...');
         callback();
+      },
+      cmd: function () {
+        grunt.log.error('cmd is undefined');
       }
     });
     var setup = options.setup;
