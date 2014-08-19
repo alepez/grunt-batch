@@ -15,7 +15,6 @@ module.exports = function (grunt) {
   grunt.registerMultiTask('batch', 'Easy way to run a shell command for each file.', function () {
     var options = this.options({
       setup: function (callback) {
-        grunt.log.ok('setup...');
         callback();
       },
       cmd: function () {
