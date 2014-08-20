@@ -9,6 +9,7 @@
 'use strict';
 
 var exec = require('child_process').exec;
+var path = require('path');
 var async = require('async');
 
 module.exports = function (grunt) {
@@ -30,8 +31,13 @@ module.exports = function (grunt) {
       files.forEach(function (f) {
         var cmd = options.cmd(f);
         series.push(function (callback) {
-          exec(cmd, function () {
-            grunt.log.ok(f.src, ' => ', f.dest);
+          grunt.file.mkdir(path.dirname(f.dest));
+          exec(cmd, function (e) {
+            if (e) {
+              grunt.log.error(f.src, ' => ', f.dest, e.message);
+            } else {
+              grunt.log.ok(f.src, ' => ', f.dest);
+            }
             callback();
           });
         });
