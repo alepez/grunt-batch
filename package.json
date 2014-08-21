@@ -15,12 +15,10 @@
   "bugs": {
     "url": "https://github.com/alessandro-pezzato/grunt-batch/issues"
   },
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "https://github.com/alessandro-pezzato/grunt-batch/blob/master/LICENSE-MIT"
-    }
-  ],
+  "licenses": [{
+    "type": "MIT",
+    "url": "https://github.com/alessandro-pezzato/grunt-batch/blob/master/LICENSE-MIT"
+  }],
   "engines": {
     "node": ">= 0.8.0"
   },
@@ -37,7 +35,7 @@
     "grunt": "~0.4"
   },
   "keywords": [
-    "gruntplugin"
+    "gruntplugin", "grunt", "batch", "shell", "exec"
   ],
   "dependencies": {
     "async": "^0.9.0"
