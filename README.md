@@ -80,7 +80,7 @@ The maximum number of tasks to run at any time.
 
 ### Usage Examples
 
-This example uses `convert` (ImageMagick) to resize images at time. Tasks are run
+This example uses `convert` (ImageMagick) to resize images. Tasks are run
 in parallel, maximum 4 at any time.  
 
 The first target is images_preview, images are resized and transparences are replaced with white background,
