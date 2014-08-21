@@ -15,22 +15,23 @@ var async = require('async');
 module.exports = function (grunt) {
   grunt.registerMultiTask('batch', 'Easy way to run a shell command for each file.', function () {
     var options = this.options({
-      setup: function (callback) {
-        callback();
+      setup: function (cb) {
+        cb();
       },
-      cmd: function () {
+      cmd: function (cb) {
         grunt.log.error('cmd is undefined');
-      }
+        cb();
+      },
+      limit: 1
     });
     var setup = options.setup;
     var files = this.files;
     var done = this.async();
     setup(function () {
-      grunt.log.ok('setup ok');
-      var series = [];
+      var tasks = [];
       files.forEach(function (f) {
         var cmd = options.cmd(f);
-        series.push(function (callback) {
+        tasks.push(function (cb) {
           grunt.file.mkdir(path.dirname(f.dest));
           exec(cmd, function (e) {
             if (e) {
@@ -38,11 +39,11 @@ module.exports = function (grunt) {
             } else {
               grunt.log.ok(f.src, ' => ', f.dest);
             }
-            callback();
+            cb();
           });
         });
       });
-      async.series(series, done);
+      async.parallelLimit(tasks, options.limit, done);
     });
   });
 };
