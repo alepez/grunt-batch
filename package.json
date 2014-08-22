@@ -20,7 +20,7 @@
     "url": "https://github.com/alessandro-pezzato/grunt-batch/blob/master/LICENSE-MIT"
   }],
   "engines": {
-    "node": ">= 0.8.0"
+    "node": ">= 0.6.0"
   },
   "scripts": {
     "test": "grunt test"
