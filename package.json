@@ -23,10 +23,10 @@
     "test": "grunt test"
   },
   "devDependencies": {
-    "grunt-contrib-jshint": "^0.9",
-    "grunt-contrib-clean": "^0.5",
-    "grunt-contrib-nodeunit": "^0.3",
-    "grunt": "^0.4"
+    "grunt-contrib-jshint": ">=0.9",
+    "grunt-contrib-clean": ">=0.5",
+    "grunt-contrib-nodeunit": ">=0.3",
+    "grunt": ">=0.4"
   },
   "peerDependencies": {
     "grunt": "^0.4"
