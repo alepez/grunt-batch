@@ -2,6 +2,12 @@
 
 > Easy way to run a shell command for each file.
 
+![npm downloads][http://img.shields.io/npm/dm/grunt-batch.svg]
+![npm version][http://img.shields.io/npm/v/npm.svg]
+![npm license][http://img.shields.io/npm/l/express.svg]
+![travis build][http://img.shields.io/travis/alessandro-pezzato/grunt-batch.svg]
+![gemnasium][http://img.shields.io/gemnasium/alessandro-pezzato/grunt-batch.svg]
+
 ## Getting Started
 This plugin requires Grunt `~0.4`
 
